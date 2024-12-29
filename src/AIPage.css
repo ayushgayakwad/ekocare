@@ -1,0 +1,95 @@
+.ai-page {
+    font-family: "Arial", sans-serif;
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  textarea,
+  select,
+  input {
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  textarea {
+    resize: none;
+    height: 100px;
+  }
+  
+  textarea:focus,
+  select:focus,
+  input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .submit-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background: #0056b3;
+  }
+  
+  .submit-button:disabled {
+    background: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .prediction-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e8f4e5;
+    border-radius: 4px;
+    border: 1px solid #d4edda;
+  }
+  
+  .prediction-container h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #155724;
+  }
+  
+  .prediction-container p {
+    font-size: 1rem;
+    color: #155724;
+  }
+  
