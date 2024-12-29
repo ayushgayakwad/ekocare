@@ -55,7 +55,7 @@ const AIPage: React.FC = () => {
         data["pdfSummary"] = pdfSummary;
       }
 
-      const response = await axios.post("https://ekocare-one.vercel.app/api/server/predict", data);
+      const response = await axios.post("https://ekocare-one.vercel.app/api/predict", data);
 
       if (response.data.prediction) {
         setPrediction(response.data.prediction);
