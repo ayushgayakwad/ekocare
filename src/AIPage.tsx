@@ -55,7 +55,7 @@ const AIPage: React.FC = () => {
         data["pdfSummary"] = pdfSummary;
       }
 
-      const response = await axios.post("http://localhost:3000/predict", data);
+      const response = await axios.post("https://ekocare-one.vercel.app/api/predict", data);
 
       if (response.data.prediction) {
         setPrediction(response.data.prediction);
@@ -80,7 +80,7 @@ const AIPage: React.FC = () => {
 
     try {
       const ipfsUrl = `https://ipfs.io/ipfs/${selectedRecord}`;
-      const response = await axios.post("http://localhost:3000/summarize-pdf", { ipfsUrl });
+      const response = await axios.post("https://ekocare-one.vercel.app/api/summarize-pdf", { ipfsUrl });
 
       if (response.data.summary) {
         setPdfSummary(response.data.summary);

@@ -21,7 +21,7 @@ const TeamDashboard: React.FC = () => {
   useEffect(() => {
     const fetchSOSRequests = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/sos");
+        const response = await axios.get("https://ekocare-one.vercel.app/api/sos");
         setSosRequests(response.data);
       } catch (error) {
         console.error("Error fetching SOS requests:", error);

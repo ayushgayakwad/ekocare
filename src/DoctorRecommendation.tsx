@@ -60,7 +60,7 @@ const DoctorRecommendation = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:3000/book-appointment', {
+      const response = await axios.post('https://ekocare-one.vercel.app/api/book-appointment', {
         patientName,
         specialty,
         coordinates, 

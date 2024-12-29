@@ -48,7 +48,7 @@ const sosSchema = new mongoose.Schema({
 
 const SOS = mongoose.model("SOS", sosSchema);
 
-app.get("/api/sos", async (req, res) => {
+app.get("/sos", async (req, res) => {
   try {
     const sosRecords = await SOS.find().sort({ timestamp: -1 });
     res.status(200).json(sosRecords);
@@ -58,7 +58,7 @@ app.get("/api/sos", async (req, res) => {
   }
 });
 
-app.post("/api/send-sos", async (req, res) => {
+app.post("/send-sos", async (req, res) => {
   const { severity, location, ipfsHash, pdfSummary, emergencyService } = req.body;
 
   if (!severity || !location || !location.lat || !location.lng) {

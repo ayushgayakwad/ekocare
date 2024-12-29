@@ -78,7 +78,7 @@ function UploadPage() {
 
     try {
       const ipfsUrl = `https://ipfs.io/ipfs/${ipfsHash}`;
-      const response = await axios.post("http://localhost:3000/summarize-pdf", { ipfsUrl });
+      const response = await axios.post("https://ekocare-one.vercel.app/api/summarize-pdf", { ipfsUrl });
 
       if (response.data.summary) {
         setPdfSummary(response.data.summary);
