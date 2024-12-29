@@ -80,7 +80,7 @@ const AIPage: React.FC = () => {
 
     try {
       const ipfsUrl = `https://ipfs.io/ipfs/${selectedRecord}`;
-      const response = await axios.post("https://ekocare-one.vercel.app/api/server/summarize-pdf", { ipfsUrl });
+      const response = await axios.post("https://ekocare-one.vercel.app/api/summarize-pdf", { ipfsUrl });
 
       if (response.data.summary) {
         setPdfSummary(response.data.summary);
