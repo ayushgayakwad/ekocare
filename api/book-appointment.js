@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import fetch from 'node-fetch';
+const axios = require('axios');
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -66,38 +66,36 @@ const doctors = [
     { "name": "Dr. Deepika Raj", "specialty": "Gastroenterologist", "experience": 10, "location": "Chennai, Tamil Nadu" }
   ];
 
-  export default async function handler(req, res) {
-    if (req.method === "POST") {
-      const { patientName, specialty, coordinates, bookingType, additionalNotes } = req.body;
-  
-      if (!coordinates || !coordinates.lat || !coordinates.lon) {
-        return res.status(400).send({ error: "Coordinates are required" });
-      }
-  
-      try {
-        const fetch = (await import('node-fetch')).default;
-        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coordinates.lat}&lon=${coordinates.lon}`);
-        const data = await response.json(); // Parse the JSON response
-        const regionName = data.address?.state_district || data.address?.state || data.address?.county || "Unknown region";
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    const { patientName, specialty, coordinates, bookingType, additionalNotes } = req.body;
 
-        let prompt = `Find the best doctor for the following patient: 
-          Patient Name: ${patientName}
-          Specialty: ${specialty || "Any"}
-          Booking Type: ${bookingType}
-          Additional Notes: ${additionalNotes}
-          Location/Region: ${regionName}
-          Please suggest the best doctor from the list below and rank them by proximity and relevance to the patient's needs. Give only suggested doctor details strictly and use text styling. Return result in markdown:
-          ${doctors.map(doctor => `${doctor.name}, Specialty: ${doctor.specialty}, Experience: ${doctor.experience} years, Location: ${doctor.location}`).join("\n")}`;
-  
-        const result = await model.generateContent(prompt);
-        const suggestedDoctor = result.response.text();
-  
-        res.status(200).json({ suggestedDoctor });
-      } catch (error) {
-        console.error("Error fetching region name or generating doctor suggestions:", error);
-        res.status(500).json({ error: "Failed to generate doctor suggestions" });
-      }
-    } else {
-      res.status(405).send({ error: "Method not allowed" });
+    if (!coordinates || !coordinates.lat || !coordinates.lon) {
+      return res.status(400).send({ error: "Coordinates are required" });
     }
+
+    try {
+      const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coordinates.lat}&lon=${coordinates.lon}`);
+      const regionName = response.data.address?.state_district || response.data.address?.state || response.data.address?.county || "Unknown region";
+
+      let prompt = `Find the best doctor for the following patient: 
+        Patient Name: ${patientName}
+        Specialty: ${specialty || "Any"}
+        Booking Type: ${bookingType}
+        Additional Notes: ${additionalNotes}
+        Location/Region: ${regionName}
+        Please suggest the best doctor from the list below and rank them by proximity and relevance to the patient's needs. Give only suggested doctor details strictly and use text styling. Return result in markdown:
+        ${doctors.map(doctor => `${doctor.name}, Specialty: ${doctor.specialty}, Experience: ${doctor.experience} years, Location: ${doctor.location}`).join("\n")}`;
+
+      const result = await model.generateContent(prompt);
+      const suggestedDoctor = result.response.text();
+
+      res.status(200).json({ suggestedDoctor });
+    } catch (error) {
+      console.error("Error fetching region name or generating doctor suggestions:", error);
+      res.status(500).json({ error: "Failed to generate doctor suggestions" });
+    }
+  } else {
+    res.status(405).send({ error: "Method not allowed" });
   }
+}
