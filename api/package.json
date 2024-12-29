@@ -12,8 +12,5 @@
   "dependencies": {
     "axios": "^1.7.0",
     "express": "^4.21.2"
-  },
-  "scripts": {
-  "postinstall": "npm install axios"
-}
+  }
 }
