@@ -75,10 +75,11 @@ const doctors = [
       }
   
       try {
+        const fetch = (await import('node-fetch')).default;
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coordinates.lat}&lon=${coordinates.lon}`);
         const data = await response.json(); // Parse the JSON response
         const regionName = data.address?.state_district || data.address?.state || data.address?.county || "Unknown region";
-  
+
         let prompt = `Find the best doctor for the following patient: 
           Patient Name: ${patientName}
           Specialty: ${specialty || "Any"}
