@@ -69,7 +69,7 @@ const SmartSOS: React.FC = () => {
     try {
       setLoading(true);
       const ipfsUrl = `https://ipfs.io/ipfs/${ipfsHash}`;
-      const response = await axios.post("https://ekocare-one.vercel.app/api/summarize-pdf", { ipfsUrl });
+      const response = await axios.post("http://localhost:3000/summarize-pdf", { ipfsUrl });
 
       if (response.data.summary) {
         setPdfSummary(response.data.summary);
@@ -104,8 +104,8 @@ const SmartSOS: React.FC = () => {
         emergencyService, 
       };
 
-      const response = await axios.post("https://ekocare-one.vercel.app/api/send-sos", sosData);
-      const response1 = await axios.post("https://ekocare-one.vercel.app/api/sos-text", sosData);
+      const response = await axios.post("http://localhost:3000/api/send-sos", sosData);
+      const response1 = await axios.post("http://localhost:3000/sos-text", sosData);
 
       if (response.status === 200) {
         setSosSent(true); 
