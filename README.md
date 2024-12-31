@@ -15,6 +15,9 @@ With features like Smart SOS for emergencies and tools for locating nearby healt
 - **Rescue Team Dashboard:** A comprehensive dashboard for rescue teams to review and respond to SOS requests effectively.
 - **Nearby Doctors and Pharmacies Finder:** Locate nearby doctors and pharmacies based on your current location for quick access to healthcare services.
 
+## Video Demonstration
+https://github.com/user-attachments/assets/084bba58-1ac3-4004-996b-12e8208d034a
+
 ## Project Structure
 
 ```
